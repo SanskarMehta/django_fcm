@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-messaging.js"></script>
+
+     <script>
+        var firebaseConfig = {
+                  apiKey: "AIzaSyDRxXgvFhVOuzKPRev4VpXu5WAl_0IVNJA",
+                  authDomain: "practicefcm-4d02d.firebaseapp.com",
+                  databaseURL: "https://practicefcm-4d02d-default-rtdb.firebaseio.com",
+                  projectId: "practicefcm-4d02d",
+                  storageBucket: "practicefcm-4d02d.appspot.com",
+                  messagingSenderId: "441252722793",
+                  appId: "1:441252722793:web:2856950bac8fa8dde3caf8",
+                  measurementId: "G-JRHJS3GFDE"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+
+        const messaging = firebase.messaging();
+        console.log(messaging.getToken())
+        messaging.getToken({ vapidKey: 'BAWwkGtKo8fnYac3eg6UNd7z-1w9BZzAjWft17V84AjRuQM3NLFXHJGndscQfSJY1DmYfRkcDyCp1nrhOrZg_dE' }).then((currentToken) => {
+        if (currentToken) {
+          sendTokenToServer(currentToken)
+        } else {
+          console.log('No registration token available. Request permission to generate one.');
+        }
+      }).catch((err) => {
+        console.log('An error occurred while retrieving token. ', err);
+      });
+
+
+        messaging
+         .requestPermission()
+         .then(function () {
+           console.log("Notification permission granted.");
+           return messaging.getToken()
+         })
+         .catch(function (err) {
+         console.log("Unable to get permission to notify.", err);
+       });
+
+        messaging.onMessage((payload) => {
+        console.log('Message received. ', payload);
+      });
+
+
+
+
+      // Send the Instance ID token your application server, so that it can:
+      // - send messages back to this app
+      function sendTokenToServer(currentToken) {
+        {
+          console.log('Sending token to server...');
+          console.log(currentToken);
+          // TODO(developer): Send the current token to your server.
+          fetch('http://127.0.0.1:8000/home/', {
+            method: "post",
+            headers: {
+                'Content-Type': 'application/json'
+              },
+            body: JSON.stringify({
+              'registration_id': currentToken,
+              'type': 'web',
+            }),
+            credentials: "include",
+          }).then(function(response) {
+            console.log(response);
+          })
+        }
+      }
+     </script>
+</head>
+<body>
+    <div>
+        <h1>This is a testing API for sending notifications.</h1>
+    </div>
+</body>
+</html>
