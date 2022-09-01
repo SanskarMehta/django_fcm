@@ -15,7 +15,9 @@ from pathlib import Path
 
 import firebase_admin
 from firebase_admin import initialize_app, credentials
+from dotenv import load_dotenv
 
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 # print(GOOGLE_APPLICATION_CREDENTIALS)
@@ -23,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-81e05l6aj36es4d#^u(%4pt&4(3p49b@#uwjl_t#0n%sa&n&%g'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -159,5 +161,8 @@ if os.path.exists(f):
     sys.modules[module_name] = module
     exec(open(f, 'rb').read())
 
+# below cred is a variable which stores the credentials of FCM app.
 cred = credentials.Certificate(os.path.join(PROJECT_APP, '../credentials-of-fcm.json'))
+# Below line is used to initialize the firebase using the above passed credentials and it is used to send the
+# notifications.
 firebase_admin.initialize_app(cred)

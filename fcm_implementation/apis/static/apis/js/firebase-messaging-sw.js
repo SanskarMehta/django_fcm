@@ -3,14 +3,14 @@ importScripts('https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js')
 importScripts('https://www.gstatic.com/firebasejs/8.2.6/firebase-messaging.js')
 
 var firebaseConfig = {
-                  apiKey: "AIzaSyDRxXgvFhVOuzKPRev4VpXu5WAl_0IVNJA",
-                  authDomain: "practicefcm-4d02d.firebaseapp.com",
-                  databaseURL: "https://practicefcm-4d02d-default-rtdb.firebaseio.com",
-                  projectId: "practicefcm-4d02d",
-                  storageBucket: "practicefcm-4d02d.appspot.com",
-                  messagingSenderId: "441252722793",
-                  appId: "1:441252722793:web:2856950bac8fa8dde3caf8",
-                  measurementId: "G-JRHJS3GFDE"
+                  apiKey: "<YOUR_API_KEY>",
+                  authDomain: "<YOUR_AUTH_DOMAIN>",
+                  databaseURL: "<YOUR_DATABASE_URL>",
+                  projectId: "<YOUR_PROJECT_ID>",
+                  storageBucket: "<YOUR_STORAGE_BUCKET>",
+                  messagingSenderId: "<YOUR_MESSAGING_SENDER_ID>",
+                  appId: "<YOUR_APP_ID>",
+                  measurementId: "<YOUR_MEASUREMENT_ID>"
         };
 
 
