@@ -12,7 +12,7 @@ db.sqlite3
 db.sqlite3-journal
 default.txt
 default.pdf
-credentials-of-fcm.json
+fcm_implementation/credentials-of-fcm.json
 fcm_implementation/fcm_implementation/.env
 
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
